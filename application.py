@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-
+import deepseek
 from entity import User
 from mapper import userMapper
 
@@ -33,7 +33,27 @@ def insert_user():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
+
+# deepseek分析PDF接口
+# {
+#   "file_path": "/Users/fantant/Desktop/TASK.pdf"
+# }
+@app.route('/api/deepseek/analysis', methods=['POST'])
+def deepseekAnalysis():
+    print("请求收到")
+    print("Headers:", request.headers)
+    print("Body:", request.get_data())
+    try:
+        data = request.get_json()
+        if not data or 'file_path' not in data:
+            return jsonify({'error': '缺少文件路径'}), 400
+
+        file_path = data['file_path']
+        result = deepseek.pdfAnalysis(file_path)
+        return jsonify({'reply': result}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 

@@ -1,9 +1,6 @@
-# deepseek.py
-
 import requests
+import pdfReader
 
-
-# 填写你的 API Key
 API_KEY = "sk-179ec153725c446fa367779e72c4f301"
 
 url = "https://api.deepseek.com/chat/completions"
@@ -32,21 +29,9 @@ def chat(message):
     else:
         return "请求失败，错误码：" + response.status_code
 
-def pdfRead():
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {API_KEY}"
-    }
+def pdfAnalysis(file_path):
+    text = pdfReader.extract_text_from_pdf(file_path)
 
-    fileURL = "C:\\Users\lenovo\OneDrive\Documents\WeChat Files\wxid_5xne60p1m21312\FileStorage\File\\2025-07\TASK.pdf"
-
-    files = {'file': open(fileURL, 'rb')}
-    response = requests.post(url, headers=headers, files=files)
-
-    if response.status_code == 200:
-        result = response.json()
-        print(result['text'])
-        return result['text']
-    else:
-        raise Exception(f"Error extracting text from PDF: {response.text}")
+    reply = chat(f"请帮我分析这份PDF内容：\n{text[:3000]}")
+    return reply
 
