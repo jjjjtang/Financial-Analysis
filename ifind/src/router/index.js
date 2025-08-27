@@ -49,15 +49,16 @@ const router = createRouter({
     history: createWebHistory(),
     routes
 })
-// 添加路由守卫
-router.beforeEach((to, from, next) => {
-    const isAuthenticated = localStorage.getItem('isAuthenticated') // 简单示例，实际项目中应该使用Vuex或Pinia
 
-    if (to.matched.some(record => record.meta.requiresAuth) && !isAuthenticated) {
-        next('/login') // 如果访问需要认证的页面且未登录，则跳转到登录页
-    } else {
-        next() // 否则继续
-    }
-})
+//添加路由守卫
+// router.beforeEach((to, from, next) => {
+//     const isAuthenticated = localStorage.getItem('isAuthenticated') // 简单示例，实际项目中应该使用Vuex或Pinia
+//
+//     if (to.matched.some(record => record.meta.requiresAuth) && !isAuthenticated) {
+//         next('/login') // 如果访问需要认证的页面且未登录，则跳转到登录页
+//     } else {
+//         next() // 否则继续
+//     }
+// })
 
 export default router

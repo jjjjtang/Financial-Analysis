@@ -1,4 +1,5 @@
 import json
+import pdfReader
 
 import requests
 APP_ID = "20f596f28a1c4a398ce94b93b2ddaf29"
@@ -23,6 +24,20 @@ def getToken():
         # print(result['data'])
     else:
         return "请求失败，错误码：" + response.status_code
+
+def pdfAnalysis(file_path):
+    text = pdfReader.extract_text_from_pdf(file_path)
+    question = f"请帮我分析这份PDF内容：\n{text[:3000]}, 返回使用txt文本，不要md格式,不要用**等符号"
+    mode = "fast"
+    reply = chat(question, mode)
+    return reply
+
+def fincialAssistant(file_path, question):
+    text = pdfReader.extract_text_from_pdf(file_path)
+    question = f"根据以下内容回答我的问题：\n{text[:3000]}\n问题是：{question},返回使用txt文本，不要md格式,不要用**等符号"
+    mode = "fast"
+    reply = chat(question, mode)
+    return reply
 
 def chat(question, mode):
     token = "Bearer " + getToken()
