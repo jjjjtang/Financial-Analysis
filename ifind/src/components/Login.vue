@@ -1,8 +1,18 @@
 <template>
   <div class="login-container">
     <div class="login-box">
-      <h2>用户登录</h2>
-      <form @submit="handleLogin">
+      <h2>{{ isRegister ? '用户注册' : '用户登录' }}</h2>
+      <form @submit.prevent="handleSubmit">
+        <div v-if="isRegister" class="form-group">
+          <label for="user_id">用户ID</label>
+          <input
+              type="number"
+              id="user_id"
+              v-model="form.user_id"
+              placeholder="请输入用户ID"
+              required
+          />
+        </div>
         <div class="form-group">
           <label for="username">用户名</label>
           <input
@@ -23,35 +33,77 @@
               required
           />
         </div>
-        <button type="submit" class="login-btn" >登录</button>
+        <button type="submit" class="login-btn">
+          {{ isRegister ? '注册' : '登录' }}
+        </button>
       </form>
+
+      <div style="margin-top: 10px; text-align: center;">
+        <span v-if="!isRegister">还没有账号？</span>
+        <span v-else>已有账号？</span>
+        <el-button type="text" @click="toggleMode">
+          {{ isRegister ? '去登录' : '去注册' }}
+        </el-button>
+      </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'Login',
-  data() {
-    return {
-      form: {
-        username: '',
-        password: ''
+<script setup>
+import { reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import http from '@/api/http'
+
+const router = useRouter()
+const isRegister = ref(false)
+
+const form = reactive({
+  user_id: '',       // 注册时使用
+  username: '',
+  password: ''
+})
+
+// 切换登录/注册模式
+function toggleMode() {
+  isRegister.value = !isRegister.value
+  form.user_id = ''
+  form.username = ''
+  form.password = ''
+}
+
+async function handleSubmit() {
+  try {
+    if (isRegister.value) {
+      // 注册请求
+      const res = await http.post('/users/register', {
+        user_id: form.user_id,
+        username: form.username,
+        password: form.password
+      })
+      alert(res.data.message || '注册成功')
+      // 注册完成后切换到登录
+      isRegister.value = false
+      form.user_id = ''
+      form.username = ''
+      form.password = ''
+    } else {
+      // 登录请求
+      const res = await http.post('/users/login', {
+        username: form.username,
+        password: form.password
+      })
+      if (res.data.message === '登录成功') {
+        alert('登录成功！')
+        router.replace('/Main').catch(err => {
+          if (err.name !== 'NavigationDuplicated') console.error(err)
+        })
+      } else {
+        alert(res.data.message || '登录失败')
       }
     }
-  },
-  methods: {
-    handleLogin() {
-      // 这里要改掉成登录的命令我这里没连接数据库就直接实现跳转作演示用
-
-
-
-      this.$router.replace('/Main').catch(err => {
-        if (err.name !== 'NavigationDuplicated') {
-          console.error('导航错误:', err)
-        }
-      })
-    }
+  } catch (err) {
+    console.error('请求失败:', err)
+    alert('网络或后端服务异常')
   }
 }
 </script>

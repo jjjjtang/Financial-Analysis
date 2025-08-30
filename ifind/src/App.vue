@@ -1,4 +1,5 @@
 <template>
+  <!-- 只保留 router-view -->
   <router-view />
 </template>
 
