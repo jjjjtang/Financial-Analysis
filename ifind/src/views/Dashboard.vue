@@ -143,8 +143,14 @@ const loading = ref(false)
 const dialogVisible = ref(false)
 
 onMounted(async () => {
-  const id = route.query.id
+  // 优先从路由获取id，如果没有就尝试从本地存储读取
+  let id = route.query.id || localStorage.getItem('reportId')
   if (!id) return
+
+  // 如果是通过路由进入，保存到本地存储
+  if (route.query.id) {
+    localStorage.setItem('reportId', id)
+  }
 
   try {
     const res = await http.get('/annualReports/getById', { params: { id } })

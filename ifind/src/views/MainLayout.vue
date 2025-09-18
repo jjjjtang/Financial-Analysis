@@ -2,7 +2,16 @@
   <div class="main-container">
     <!-- 左侧导航栏 -->
     <div class="sidebar">
-      <div class="logo">系统LOGO</div>
+      <div style="display: flex">
+        <div class="logo">
+          <img src="../../public/logo.png" style="height: 45px; width: 45px; padding-top: 7px;padding-left: 15px">
+          <img src="../../public/logo.png" style="height: 45px; width: 45px; padding-top: 7px;padding-left: 15px">
+        </div>
+        <div style="background-color: #2C2F39; padding-top: 18px;padding-left: 17px;font-size: 20px;font-weight: bold;width: 100%">
+          财报分析系统
+        </div>
+      </div>
+
       <el-menu
           :default-active="activeMenu"
           class="el-menu-vertical"
@@ -18,14 +27,14 @@
           <i class="el-icon-document-checked"></i>
           <span>财报摘要</span>
         </el-menu-item>
-        <el-menu-item index="/Main/MarketOverview" @click="$router.push('/Main/MarketOverview')">
-          <i class="el-icon-s-data"></i>
-          <span>市场概览</span>
-        </el-menu-item>
-        <el-menu-item index="/Main/CompanyInfo" @click="$router.push('/Main/CompanyInfo')">
-          <i class="el-icon-user"></i>
-          <span>公司信息</span>
-        </el-menu-item>
+<!--        <el-menu-item index="/Main/MarketOverview" @click="$router.push('/Main/MarketOverview')">-->
+<!--          <i class="el-icon-s-data"></i>-->
+<!--          <span>市场概览</span>-->
+<!--        </el-menu-item>-->
+<!--        <el-menu-item index="/Main/CompanyInfo" @click="$router.push('/Main/CompanyInfo')">-->
+<!--          <i class="el-icon-user"></i>-->
+<!--          <span>公司信息</span>-->
+<!--        </el-menu-item>-->
       </el-menu>
     </div>
 
@@ -53,8 +62,10 @@
 </template>
 
 <script>
+
 export default {
   name: 'MainLayout',
+  methods: {},
   computed: {
     activeMenu() {
       return this.$route.path
