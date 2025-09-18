@@ -94,7 +94,9 @@ async function handleSubmit() {
       })
       if (res.data.message === '登录成功') {
         alert('登录成功！')
-        router.replace('/Main').catch(err => {
+        console.log(res.data)
+        localStorage.setItem('isAuthenticated', 'true')
+        router.replace('/home').catch(err => {
           if (err.name !== 'NavigationDuplicated') console.error(err)
         })
       } else {

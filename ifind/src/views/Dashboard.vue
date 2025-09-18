@@ -1,21 +1,30 @@
 <template>
   <div class="dashboard-container">
-    <!-- 左侧财报查询 -->
+    <!-- 左侧财报展示 -->
     <div class="left-panel">
-      <h3>财报查询</h3>
-      <div class="query-form">
-        <el-input v-model="companyCode" placeholder="公司代码" style="flex:1; margin-right:5px;" />
-        <el-input v-model="year" placeholder="年份" style="flex:1; margin-right:5px;" />
-        <el-input v-model="reportId" placeholder="报表ID" style="flex:1;" />
-        <el-button type="primary" @click="fetchReport" style="margin-left:5px;">查询</el-button>
+      <div class="report-header">
+        <h3 class="section-title">财报详情</h3>
+        <div class="report-info">
+          <span class="report-title">
+            {{ report?.company_name }} - {{ report?.title }}
+          </span>
+          <el-button
+              v-if="report"
+              type="primary"
+              size="small"
+              @click="downloadReport"
+          >
+            下载PDF
+          </el-button>
+        </div>
       </div>
 
-      <div class="report-result" v-if="reportList.length">
-        <div v-for="item in reportList" :key="item.id" class="report-item">
-          <p><strong>{{ item.company_name }}</strong> - {{ item.title }}：
-            <a :href="item.link" target="_blank">{{ item.link }}</a>
-          </p>
-        </div>
+      <div class="report-result" v-if="report">
+        <iframe
+            :src="report.link"
+            class="pdf-viewer"
+            frameborder="0"
+        ></iframe>
       </div>
     </div>
 
@@ -23,34 +32,40 @@
     <div class="right-panel">
       <h3>AI 财报问答</h3>
 
-      <!-- 模型选择滑块 -->
+      <!-- 模型选择 -->
       <el-radio-group v-model="selectedModel" style="margin-bottom: 10px;">
         <el-radio-button label="Hithink">Hithink</el-radio-button>
         <el-radio-button label="Deepseek">Deepseek</el-radio-button>
       </el-radio-group>
 
-      <!-- PDF 文件选择 -->
-      <el-select
-          v-model="selectedPdf"
-          placeholder="选择PDF文件"
-          style="width: 100%; margin-bottom: 10px;"
-      >
-        <el-option
-            v-for="file in pdfFiles"
-            :key="file.path"
-            :label="file.name"
-            :value="file.path"
-        />
-      </el-select>
-
-      <div class="chat-box">
-        <div
-            class="chat-message user"
-            v-for="(msg, index) in messages"
-            :key="index"
-        >
-          <strong>{{ msg.role }}：</strong>{{ msg.content }}
+      <!-- 聊天框 -->
+      <div class="chat-container">
+        <div class="chat-box">
+          <div
+              class="chat-message"
+              v-for="(msg, index) in messages"
+              :key="index"
+          >
+            <strong>{{ msg.role }}：</strong>
+            <div v-if="msg.role === 'AI'" v-html="msg.content"></div>
+            <div v-else>{{ msg.content }}</div>
+          </div>
         </div>
+
+        <!-- 放大按钮 -->
+        <el-button
+            circle
+            size="mini"
+            class="expand-btn"
+            @click="dialogVisible = true"
+            title="放大查看"
+        >
+          <svg t="1758187478669" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+               width="20" height="20">
+            <path d="M368.896 192H224a32 32 0 0 0-32 32v137.888a32 32 0 0 0 64 0V256h112.896a32 32 0 0 0 0-64zM784.864 192H640a32 32 0 1 0 0 64h112.864v105.888a32 32 0 1 0 64 0V224a32 32 0 0 0-32-32zM368.896 777.92H256V672a32 32 0 1 0-64 0v137.92a32 32 0 0 0 32 32h144.896a32 32 0 1 0 0-64zM784.864 640a32 32 0 0 0-32 32v105.92H640a32 32 0 1 0 0 64h144.864a32 32 0 0 0 32-32V672a32 32 0 0 0-32-32z" fill="#707070"></path>
+            <path d="M912 48h-800c-35.296 0-64 28.704-64 64v800c0 35.296 28.704 64 64 64h800c35.296 0 64-28.704 64-64v-800c0-35.296-28.704-64-64-64z m-800 864v-800h800l0.064 800H112z" fill="#707070"></path>
+          </svg>
+        </el-button>
       </div>
 
       <el-input
@@ -58,127 +73,129 @@
           v-model="inputMessage"
           placeholder="请输入你的问题"
           rows="3"
+          :disabled="loading"
+          @keydown.enter.prevent="sendMessage"
       />
       <el-button
           type="primary"
           @click="sendMessage"
           style="margin-top: 10px;"
-          :disabled="!selectedPdf || !inputMessage.trim()"
+          :disabled="!report || !inputMessage.trim() || loading"
       >
-        发送
+        {{ loading ? '思考中...' : '发送' }}
+      </el-button>
+
+      <!-- 返回首页按钮 -->
+      <el-button
+          type="info"
+          plain
+          style="margin-top: 10px;"
+          @click="goHome"
+      >
+        返回首页
       </el-button>
     </div>
+
+    <!-- Dialog 放大聊天框 -->
+    <el-dialog
+        v-model="dialogVisible"
+        width="70vw"
+        top="5vh"
+        custom-class="full-chat-dialog"
+        :close-on-click-modal="false"
+    >
+      <template #title>
+        <div class="dialog-title">
+          <span>AI 聊天内容</span>
+        </div>
+      </template>
+
+      <div class="dialog-chat-box">
+        <div
+            class="chat-message"
+            v-for="(msg, index) in messages"
+            :key="'dialog-' + index"
+        >
+          <strong>{{ msg.role }}：</strong>
+          <div v-if="msg.role === 'AI'" v-html="msg.content"></div>
+          <div v-else>{{ msg.content }}</div>
+        </div>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import * as echarts from 'echarts'
+import { ref, onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import http from '@/api/http'
+import MarkdownIt from 'markdown-it'
 
-// 左侧查询输入
-const companyCode = ref('')
-const year = ref('')
-const reportId = ref('')
+const route = useRoute()
+const router = useRouter()
+const md = new MarkdownIt()
 
-// 查询结果
-const reportList = ref([])
-
-// AI 问答
+const report = ref(null)
 const messages = ref([])
 const inputMessage = ref('')
 const selectedModel = ref('Hithink')
-const pdfFiles = ref([
-  {name: '平安银行 2021 年报', path: 'annualReportTools/annualFiles/2021/pdf_Format/000001_平安银行_2021.pdf'},
-  {name: '平安银行 2022 年报', path: 'annualReportTools/annualFiles/2022/pdf_Format/000001_平安银行_2022.pdf'}
-])
-const selectedPdf = ref('')
+const loading = ref(false)
+const dialogVisible = ref(false)
 
-// 查询年报
-async function fetchReport() {
+onMounted(async () => {
+  const id = route.query.id
+  if (!id) return
+
   try {
-    let res
-    if (!companyCode.value && !year.value && !reportId.value) {
-      // 全空，获取所有年报
-      res = await http.get('/annualReports/getAll')
-      reportList.value = res.data.map(r => ({
-        company_name: r.company_name,
-        title: r.title,
-        link: r.link,
-        pdf_url: r.pdf_url,
-        id: r.id
-      }))
-    } else if (reportId.value.trim()) {
-      // 根据 id 查询
-      res = await http.get('/annualReports/getById', { params: { id: reportId.value } })
-      reportList.value = [{
-        company_name: res.data.company_name,
-        title: res.data.title,
-        link: res.data.link,
-        pdf_url: res.data.pdf_url,
-        id: res.data.id
-      }]
-    } else if (companyCode.value.trim() && year.value.trim()) {
-      // 根据 company_code + year 查询
-      res = await http.get('/annualReports/getByCompanyCodeAndYear', {
-        params: { company_code: companyCode.value, year: year.value }
-      })
-      reportList.value = [{
-        company_name: res.data.company_name,
-        title: res.data.title,
-        link: res.data.link,
-        pdf_url: res.data.pdf_url,
-        id: res.data.id
-      }]
-    } else {
-      reportList.value = []
-      alert('请完整填写查询条件')
-    }
-
-    // 自动更新右侧 PDF 下拉列表
-    pdfFiles.value = reportList.value.map(r => ({
-      name: `${r.company_name} - ${r.title}`,
-      path: r.pdf_url
-    }))
-    selectedPdf.value = '' // 清空选择
+    const res = await http.get('/annualReports/getById', { params: { id } })
+    report.value = res.data
   } catch (err) {
-    console.error('查询失败', err)
-    reportList.value = []
+    console.error('获取年报详情失败:', err)
   }
-}
+})
 
 // 发送消息
 async function sendMessage() {
-  if (!inputMessage.value.trim() || !selectedPdf.value) return
-  messages.value.push({role: '用户', content: inputMessage.value})
+  if (!inputMessage.value.trim() || !report.value) return
+  const question = inputMessage.value
+  inputMessage.value = ''
+  messages.value.push({ role: '用户', content: question })
+
+  loading.value = true
+  const thinkingMsgIndex = messages.value.push({ role: 'AI', content: '思考中...' }) - 1
 
   try {
     let res
     if (selectedModel.value === 'Hithink') {
-      res = await http.post('/hithink/financialAssistant', {
-        file_path: selectedPdf.value,
-        question: inputMessage.value
-      }, {
-        headers: {'Content-Type': 'application/json'},
-        timeout: 300000
-      })
-      messages.value.push({role: 'AI', content: res.data.reply})
-    } else if (selectedModel.value === 'Deepseek') {
-      res = await http.post('/deepseek/analysis', {
-        file_path: selectedPdf.value,
-        message: inputMessage.value
-      }, {
-        headers: {'Content-Type': 'application/json'},
-        timeout: 300000
-      })
-      messages.value.push({role: 'AI', content: res.data.reply})
+      res = await http.post(
+          '/hithink/financialAssistant',
+          { file_path: report.value.pdf_url, question },
+          { headers: { 'Content-Type': 'application/json' }, timeout: 900000 }
+      )
+    } else {
+      res = await http.post(
+          '/deepseek/analysis',
+          { file_path: report.value.pdf_url, message: question },
+          { headers: { 'Content-Type': 'application/json' }, timeout: 900000 }
+      )
     }
-  } catch (err) {
-    console.error('AI 接口请求失败:', err)
-    messages.value.push({role: 'AI', content: '接口请求失败，请稍后再试'})
-  }
 
-  inputMessage.value = ''
+    messages.value[thinkingMsgIndex].content = md.render(res.data.reply || '（无返回内容）')
+  } catch (err) {
+    messages.value[thinkingMsgIndex].content = '接口请求失败，请稍后再试'
+    console.error(err)
+  } finally {
+    loading.value = false
+  }
+}
+
+// 下载 PDF
+function downloadReport() {
+  if (report.value?.link) window.open(report.value.link, '_blank')
+}
+
+function goHome() {
+  router.push('/home')
 }
 </script>
 
@@ -194,19 +211,39 @@ async function sendMessage() {
   padding: 20px;
   background-color: #fff;
   overflow-y: auto;
-}
-
-.query-form {
   display: flex;
-  margin-bottom: 10px;
+  flex-direction: column;
 }
 
-.report-result {
-  margin-top: 20px;
+.report-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }
 
-.report-item {
-  margin-bottom: 10px;
+.section-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.report-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.report-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.pdf-viewer {
+  width: 100%;
+  height: 720px;
+  border: none;
 }
 
 .right-panel {
@@ -215,7 +252,11 @@ async function sendMessage() {
   background-color: #fafafa;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.chat-container {
+  position: relative;
 }
 
 .chat-box {
@@ -233,11 +274,30 @@ async function sendMessage() {
   line-height: 1.6;
 }
 
-.user {
-  text-align: left;
+.expand-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
 
-.ai {
-  text-align: right;
+.full-chat-dialog .el-dialog__body {
+  padding: 0;
+}
+
+.dialog-chat-box {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 15px;
+  background-color: #fff;
+}
+
+.dialog-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dialog-close-btn {
+  margin-left: auto;
 }
 </style>

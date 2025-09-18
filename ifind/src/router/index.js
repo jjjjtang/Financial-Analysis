@@ -5,10 +5,16 @@ import Dashboard from '../views/Dashboard.vue'
 import FinancialReport from '../views/FinancialReport.vue'
 import MarketOverview from '../views/MarketOverview.vue'
 import CompanyInfo from '../views/CompanyInfo.vue'
+import HomeView from "@/views/HomeView.vue";
 const routes = [
     {
         path: '/',
         redirect: '/login',
+    },
+    {
+        path: '/home',
+        name: 'homeView',
+        component: HomeView
     },
     {
         path: '/login',
