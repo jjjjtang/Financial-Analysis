@@ -8,7 +8,7 @@ from mapper import annualReportMapper
 import re
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 # 查询所有用户接口
 @app.route('/api/users', methods=['GET'])

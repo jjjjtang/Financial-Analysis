@@ -8,7 +8,7 @@ url = "https://api.deepseek.com/chat/completions"
 def chat(message,file):
     if file:
         text = pdfReader.extract_text_from_pdf(file)
-        message = f"根据以下内容回答我的问题：\n{text[:3000]}\n问题是：{message},返回使用txt文本，不要md格式"
+        message = f"根据以下内容回答我的问题：\n{text}\n问题是：{message},返回数据使用美观的md格式"
 
     headers = {
         "Content-Type": "application/json",
@@ -36,9 +36,8 @@ def chat(message,file):
 def pdfAnalysis(file_path):
     text = pdfReader.extract_text_from_pdf(file_path)
 
-
     reply = chat(
-        f"请帮我分析这份PDF内容：\n{text[:3000]}, 返回使用txt文本，不要md格式",
+        f"请帮我分析这份PDF内容：\n{text[:3000]}, 返回数据使用美观的md格式",
         file_path
     )
     return reply

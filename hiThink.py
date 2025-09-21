@@ -27,14 +27,14 @@ def getToken():
 
 def pdfAnalysis(file_path):
     text = pdfReader.extract_text_from_pdf(file_path)
-    question = f"请帮我分析这份PDF内容：\n{text[:3000]}, 返回使用txt文本，不要md格式,不要用**等符号"
+    question = f"请帮我分析这份PDF内容：\n{text[:3000]}, 返回数据使用美观的md格式"
     mode = "fast"
     reply = chat(question, mode)
     return reply
 
 def fincialAssistant(file_path, question):
     text = pdfReader.extract_text_from_pdf(file_path)
-    question = f"根据以下内容回答我的问题：\n{text[:3000]}\n问题是：{question},返回使用txt文本，不要md格式,不要用**等符号"
+    question = f"根据以下内容回答我的问题：\n{text[:3000]}\n问题是：{question},返回数据使用美观的md格式"
     mode = "fast"
     reply = chat(question, mode)
     return reply
