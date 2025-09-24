@@ -29,12 +29,15 @@
       <h3>高频金融序列</h3>
       <div ref="seriesChart" class="chart-box"></div>
     </el-card>
+
+    <history-chart-card></history-chart-card>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import * as echarts from 'echarts'
+import HistoryChartCard from "@/components/HistoryChartCard.vue";
 
 // 模拟基本金融信息
 const basicInfo = ref({

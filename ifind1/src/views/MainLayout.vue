@@ -28,6 +28,12 @@
           <i class="el-icon-document-checked"></i>
           <span>财报摘要</span>
         </el-menu-item>
+
+        <el-menu-item index="/Main/MarketOverview" @click="$router.push('/Main/MarketOverview')">
+          <i class="el-icon-s-data"></i>
+          <span>历史数据</span>
+        </el-menu-item>
+
         <!-- 可选功能：其他菜单 -->
         <!--
         <el-menu-item index="/Main/MarketOverview" @click="$router.push('/Main/MarketOverview')">

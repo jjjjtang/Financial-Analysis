@@ -5,6 +5,7 @@ import hiThink
 from entity import User
 from mapper import userMapper
 from mapper import annualReportMapper
+from serveriFinD import basicDataGetter
 import re
 
 app = Flask(__name__)
@@ -228,6 +229,26 @@ def hithinkFinancialAssistant():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+# 基础数据获取接口
+# {
+#   "codes": ["300033.SZ", "600000.SH"]
+# }
+@app.route('/api/basicData', methods=['POST'])
+def get_basic_data():
+    try:
+        data = request.get_json()
+        if not data or 'codes' not in data:
+            return jsonify({'error': '缺少 codes 字段'}), 400
+
+        codes = data['codes']
+        result = basicDataGetter.get_basic_data(codes)
+        return jsonify(result), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 
 
 def run():

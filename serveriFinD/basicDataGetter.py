@@ -1,6 +1,6 @@
 import requests
 import json
-import tokenGetter
+from . import tokenGetter
 
 # === 配置 ===
 thsUrl = 'https://quantapi.51ifind.com/api/v1/basic_data_service'

@@ -214,8 +214,8 @@ def date_offset():
 
 
 def main():
-    print("实时行情")  #realTimeGetter
-    real_time()
+    # print("实时行情")  #realTimeGetter
+    # real_time()
 
     # print("基础数据")  #basicDataGetter
     # basic_data()
@@ -226,16 +226,16 @@ def main():
     # print("专题报表")
     # data_pool()
 
-    # print("历史行情")
-    # history_quotes()
+    print("历史行情")   #historyQuotesGetter
+    history_quotes()
 
-    # print("高频序列")  没有数据，需要正式账号
+    # print("高频序列")     没有数据，需要正式账号
     # high_frequency()
 
-    # print("经济数据库")
+    # print("经济数据库")    没有数据，需要正式账号
     # edb()
 
-    # print("日内快照")
+    # print("日内快照")     没有数据，需要正式账号
     # snap_shot()
 
     # print("公告函数")
@@ -243,9 +243,9 @@ def main():
 
     # print("智能选股")
     # WCQuery()
-
-    # # print("日期查询函数")
-    # # date_query()
+    #
+    # print("日期查询函数")
+    # date_query()
 
     # print("日期偏移函数")
     # date_offset()
