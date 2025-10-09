@@ -146,9 +146,9 @@ const dialogVisible = ref(false)
 const models = [
   { label: 'Hithink', value: 'Hithink' },
   { label: 'Deepseek', value: 'Deepseek' },
-  { label: 'FinBot（虚拟）', value: 'FinBot' },
-  { label: 'SmartFinance（虚拟）', value: 'SmartFinance' },
-  { label: 'AlphaAI（虚拟）', value: 'AlphaAI' }
+  { label: 'FinBot', value: 'FinBot' },
+  { label: 'SmartFinance', value: 'SmartFinance' },
+  { label: 'AlphaAI', value: 'AlphaAI' }
 ]
 
 onMounted(async () => {
