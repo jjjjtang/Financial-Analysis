@@ -1,0 +1,645 @@
+{
+  "success": true,
+  "stockInfo": {
+    "gid": "sh600570",
+    "name": "恒生电子",
+    "currentPrice": 38.424,
+    "lastUpdate": "2025-11-03 11:49:31"
+  },
+  "modelPerformance": {
+    "mse": 42.8614,
+    "r2": -26.5596,
+    "featureImportance": {
+      "CNN_Patterns": "卷积模式识别",
+      "Local_Features": "局部特征提取",
+      "Time_Windows": "时间窗口分析"
+    }
+  },
+  "klineData": {
+    "historical": [
+      {
+        "date": "2025-10-14",
+        "open": 29.087,
+        "high": 31.308,
+        "low": 28.384,
+        "close": 29.902,
+        "volume": 1111825,
+        "predicted": false,
+        "increase": 0.292,
+        "increPer": 0.99
+      },
+      {
+        "date": "2025-10-15",
+        "open": 29.45,
+        "high": 31.339,
+        "low": 27.403,
+        "close": 30.961,
+        "volume": 1564383,
+        "predicted": false,
+        "increase": 1.059,
+        "increPer": 3.54
+      },
+      {
+        "date": "2025-10-16",
+        "open": 30.156,
+        "high": 32.962,
+        "low": 30.841,
+        "close": 32.233,
+        "volume": 1429837,
+        "predicted": false,
+        "increase": 1.272,
+        "increPer": 4.11
+      },
+      {
+        "date": "2025-10-17",
+        "open": 31.697,
+        "high": 33.198,
+        "low": 31.338,
+        "close": 32.569,
+        "volume": 1787333,
+        "predicted": false,
+        "increase": 0.336,
+        "increPer": 1.04
+      },
+      {
+        "date": "2025-10-18",
+        "open": 34.019,
+        "high": 34.967,
+        "low": 30.694,
+        "close": 31.209,
+        "volume": 894062,
+        "predicted": false,
+        "increase": -1.36,
+        "increPer": -4.18
+      },
+      {
+        "date": "2025-10-19",
+        "open": 29.841,
+        "high": 34.061,
+        "low": 29.63,
+        "close": 32.445,
+        "volume": 1085922,
+        "predicted": false,
+        "increase": 1.236,
+        "increPer": 3.96
+      },
+      {
+        "date": "2025-10-20",
+        "open": 32.386,
+        "high": 34.033,
+        "low": 31.079,
+        "close": 33.262,
+        "volume": 184164,
+        "predicted": false,
+        "increase": 0.817,
+        "increPer": 2.52
+      },
+      {
+        "date": "2025-10-21",
+        "open": 34.671,
+        "high": 34.222,
+        "low": 33.101,
+        "close": 33.849,
+        "volume": 356732,
+        "predicted": false,
+        "increase": 0.587,
+        "increPer": 1.77
+      },
+      {
+        "date": "2025-10-22",
+        "open": 32.042,
+        "high": 36.024,
+        "low": 31.815,
+        "close": 33.906,
+        "volume": 577720,
+        "predicted": false,
+        "increase": 0.057,
+        "increPer": 0.17
+      },
+      {
+        "date": "2025-10-23",
+        "open": 33.571,
+        "high": 35.546,
+        "low": 33.549,
+        "close": 34.373,
+        "volume": 1805853,
+        "predicted": false,
+        "increase": 0.467,
+        "increPer": 1.38
+      },
+      {
+        "date": "2025-10-24",
+        "open": 35.819,
+        "high": 38.136,
+        "low": 31.951,
+        "close": 35.922,
+        "volume": 1135381,
+        "predicted": false,
+        "increase": 1.549,
+        "increPer": 4.51
+      },
+      {
+        "date": "2025-10-25",
+        "open": 36.068,
+        "high": 36.173,
+        "low": 35.175,
+        "close": 35.318,
+        "volume": 1139547,
+        "predicted": false,
+        "increase": -0.604,
+        "increPer": -1.68
+      },
+      {
+        "date": "2025-10-26",
+        "open": 35.767,
+        "high": 37.593,
+        "low": 34.967,
+        "close": 36.119,
+        "volume": 1400482,
+        "predicted": false,
+        "increase": 0.801,
+        "increPer": 2.27
+      },
+      {
+        "date": "2025-10-27",
+        "open": 34.8,
+        "high": 38.918,
+        "low": 35.44,
+        "close": 37.203,
+        "volume": 905353,
+        "predicted": false,
+        "increase": 1.084,
+        "increPer": 3.0
+      },
+      {
+        "date": "2025-10-28",
+        "open": 36.384,
+        "high": 40.506,
+        "low": 35.055,
+        "close": 38.191,
+        "volume": 188962,
+        "predicted": false,
+        "increase": 0.988,
+        "increPer": 2.66
+      },
+      {
+        "date": "2025-10-29",
+        "open": 38.338,
+        "high": 41.09,
+        "low": 36.776,
+        "close": 37.258,
+        "volume": 1236210,
+        "predicted": false,
+        "increase": -0.933,
+        "increPer": -2.44
+      },
+      {
+        "date": "2025-10-30",
+        "open": 36.469,
+        "high": 40.151,
+        "low": 37.079,
+        "close": 38.485,
+        "volume": 512552,
+        "predicted": false,
+        "increase": 1.227,
+        "increPer": 3.29
+      },
+      {
+        "date": "2025-10-31",
+        "open": 38.239,
+        "high": 42.024,
+        "low": 37.155,
+        "close": 39.113,
+        "volume": 769240,
+        "predicted": false,
+        "increase": 0.628,
+        "increPer": 1.63
+      },
+      {
+        "date": "2025-11-01",
+        "open": 40.556,
+        "high": 40.85,
+        "low": 38.915,
+        "close": 39.93,
+        "volume": 1015864,
+        "predicted": false,
+        "increase": 0.817,
+        "increPer": 2.09
+      },
+      {
+        "date": "2025-11-02",
+        "open": 40.216,
+        "high": 42.342,
+        "low": 35.935,
+        "close": 38.424,
+        "volume": 1010436,
+        "predicted": false,
+        "increase": -1.506,
+        "increPer": -3.77
+      }
+    ],
+    "predictions": [
+      {
+        "date": "2025-11-04",
+        "open": 38.38,
+        "high": 38.691,
+        "low": 31.416,
+        "close": 31.672,
+        "volume": 850023,
+        "predicted": true,
+        "increase": -6.752,
+        "increPer": -17.57
+      },
+      {
+        "date": "2025-11-05",
+        "open": 31.657,
+        "high": 32.463,
+        "low": 31.207,
+        "close": 32.008,
+        "volume": 724447,
+        "predicted": true,
+        "increase": 0.336,
+        "increPer": 1.06
+      },
+      {
+        "date": "2025-11-06",
+        "open": 32.046,
+        "high": 32.29,
+        "low": 31.365,
+        "close": 31.605,
+        "volume": 629736,
+        "predicted": true,
+        "increase": -0.403,
+        "increPer": -1.26
+      },
+      {
+        "date": "2025-11-07",
+        "open": 31.57,
+        "high": 32.019,
+        "low": 30.324,
+        "close": 30.761,
+        "volume": 690895,
+        "predicted": true,
+        "increase": -0.844,
+        "increPer": -2.67
+      },
+      {
+        "date": "2025-11-08",
+        "open": 30.749,
+        "high": 32.098,
+        "low": 30.175,
+        "close": 31.51,
+        "volume": 785723,
+        "predicted": true,
+        "increase": 0.748,
+        "increPer": 2.43
+      },
+      {
+        "date": "2025-11-09",
+        "open": 31.457,
+        "high": 32.44,
+        "low": 30.894,
+        "close": 31.868,
+        "volume": 753763,
+        "predicted": true,
+        "increase": 0.359,
+        "increPer": 1.14
+      },
+      {
+        "date": "2025-11-10",
+        "open": 31.913,
+        "high": 32.526,
+        "low": 30.616,
+        "close": 31.216,
+        "volume": 762621,
+        "predicted": true,
+        "increase": -0.653,
+        "increPer": -2.05
+      }
+    ],
+    "allData": [
+      {
+        "date": "2025-10-14",
+        "open": 29.087,
+        "high": 31.308,
+        "low": 28.384,
+        "close": 29.902,
+        "volume": 1111825,
+        "predicted": false,
+        "increase": 0.292,
+        "increPer": 0.99
+      },
+      {
+        "date": "2025-10-15",
+        "open": 29.45,
+        "high": 31.339,
+        "low": 27.403,
+        "close": 30.961,
+        "volume": 1564383,
+        "predicted": false,
+        "increase": 1.059,
+        "increPer": 3.54
+      },
+      {
+        "date": "2025-10-16",
+        "open": 30.156,
+        "high": 32.962,
+        "low": 30.841,
+        "close": 32.233,
+        "volume": 1429837,
+        "predicted": false,
+        "increase": 1.272,
+        "increPer": 4.11
+      },
+      {
+        "date": "2025-10-17",
+        "open": 31.697,
+        "high": 33.198,
+        "low": 31.338,
+        "close": 32.569,
+        "volume": 1787333,
+        "predicted": false,
+        "increase": 0.336,
+        "increPer": 1.04
+      },
+      {
+        "date": "2025-10-18",
+        "open": 34.019,
+        "high": 34.967,
+        "low": 30.694,
+        "close": 31.209,
+        "volume": 894062,
+        "predicted": false,
+        "increase": -1.36,
+        "increPer": -4.18
+      },
+      {
+        "date": "2025-10-19",
+        "open": 29.841,
+        "high": 34.061,
+        "low": 29.63,
+        "close": 32.445,
+        "volume": 1085922,
+        "predicted": false,
+        "increase": 1.236,
+        "increPer": 3.96
+      },
+      {
+        "date": "2025-10-20",
+        "open": 32.386,
+        "high": 34.033,
+        "low": 31.079,
+        "close": 33.262,
+        "volume": 184164,
+        "predicted": false,
+        "increase": 0.817,
+        "increPer": 2.52
+      },
+      {
+        "date": "2025-10-21",
+        "open": 34.671,
+        "high": 34.222,
+        "low": 33.101,
+        "close": 33.849,
+        "volume": 356732,
+        "predicted": false,
+        "increase": 0.587,
+        "increPer": 1.77
+      },
+      {
+        "date": "2025-10-22",
+        "open": 32.042,
+        "high": 36.024,
+        "low": 31.815,
+        "close": 33.906,
+        "volume": 577720,
+        "predicted": false,
+        "increase": 0.057,
+        "increPer": 0.17
+      },
+      {
+        "date": "2025-10-23",
+        "open": 33.571,
+        "high": 35.546,
+        "low": 33.549,
+        "close": 34.373,
+        "volume": 1805853,
+        "predicted": false,
+        "increase": 0.467,
+        "increPer": 1.38
+      },
+      {
+        "date": "2025-10-24",
+        "open": 35.819,
+        "high": 38.136,
+        "low": 31.951,
+        "close": 35.922,
+        "volume": 1135381,
+        "predicted": false,
+        "increase": 1.549,
+        "increPer": 4.51
+      },
+      {
+        "date": "2025-10-25",
+        "open": 36.068,
+        "high": 36.173,
+        "low": 35.175,
+        "close": 35.318,
+        "volume": 1139547,
+        "predicted": false,
+        "increase": -0.604,
+        "increPer": -1.68
+      },
+      {
+        "date": "2025-10-26",
+        "open": 35.767,
+        "high": 37.593,
+        "low": 34.967,
+        "close": 36.119,
+        "volume": 1400482,
+        "predicted": false,
+        "increase": 0.801,
+        "increPer": 2.27
+      },
+      {
+        "date": "2025-10-27",
+        "open": 34.8,
+        "high": 38.918,
+        "low": 35.44,
+        "close": 37.203,
+        "volume": 905353,
+        "predicted": false,
+        "increase": 1.084,
+        "increPer": 3.0
+      },
+      {
+        "date": "2025-10-28",
+        "open": 36.384,
+        "high": 40.506,
+        "low": 35.055,
+        "close": 38.191,
+        "volume": 188962,
+        "predicted": false,
+        "increase": 0.988,
+        "increPer": 2.66
+      },
+      {
+        "date": "2025-10-29",
+        "open": 38.338,
+        "high": 41.09,
+        "low": 36.776,
+        "close": 37.258,
+        "volume": 1236210,
+        "predicted": false,
+        "increase": -0.933,
+        "increPer": -2.44
+      },
+      {
+        "date": "2025-10-30",
+        "open": 36.469,
+        "high": 40.151,
+        "low": 37.079,
+        "close": 38.485,
+        "volume": 512552,
+        "predicted": false,
+        "increase": 1.227,
+        "increPer": 3.29
+      },
+      {
+        "date": "2025-10-31",
+        "open": 38.239,
+        "high": 42.024,
+        "low": 37.155,
+        "close": 39.113,
+        "volume": 769240,
+        "predicted": false,
+        "increase": 0.628,
+        "increPer": 1.63
+      },
+      {
+        "date": "2025-11-01",
+        "open": 40.556,
+        "high": 40.85,
+        "low": 38.915,
+        "close": 39.93,
+        "volume": 1015864,
+        "predicted": false,
+        "increase": 0.817,
+        "increPer": 2.09
+      },
+      {
+        "date": "2025-11-02",
+        "open": 40.216,
+        "high": 42.342,
+        "low": 35.935,
+        "close": 38.424,
+        "volume": 1010436,
+        "predicted": false,
+        "increase": -1.506,
+        "increPer": -3.77
+      },
+      {
+        "date": "2025-11-04",
+        "open": 38.38,
+        "high": 38.691,
+        "low": 31.416,
+        "close": 31.672,
+        "volume": 850023,
+        "predicted": true,
+        "increase": -6.752,
+        "increPer": -17.57
+      },
+      {
+        "date": "2025-11-05",
+        "open": 31.657,
+        "high": 32.463,
+        "low": 31.207,
+        "close": 32.008,
+        "volume": 724447,
+        "predicted": true,
+        "increase": 0.336,
+        "increPer": 1.06
+      },
+      {
+        "date": "2025-11-06",
+        "open": 32.046,
+        "high": 32.29,
+        "low": 31.365,
+        "close": 31.605,
+        "volume": 629736,
+        "predicted": true,
+        "increase": -0.403,
+        "increPer": -1.26
+      },
+      {
+        "date": "2025-11-07",
+        "open": 31.57,
+        "high": 32.019,
+        "low": 30.324,
+        "close": 30.761,
+        "volume": 690895,
+        "predicted": true,
+        "increase": -0.844,
+        "increPer": -2.67
+      },
+      {
+        "date": "2025-11-08",
+        "open": 30.749,
+        "high": 32.098,
+        "low": 30.175,
+        "close": 31.51,
+        "volume": 785723,
+        "predicted": true,
+        "increase": 0.748,
+        "increPer": 2.43
+      },
+      {
+        "date": "2025-11-09",
+        "open": 31.457,
+        "high": 32.44,
+        "low": 30.894,
+        "close": 31.868,
+        "volume": 753763,
+        "predicted": true,
+        "increase": 0.359,
+        "increPer": 1.14
+      },
+      {
+        "date": "2025-11-10",
+        "open": 31.913,
+        "high": 32.526,
+        "low": 30.616,
+        "close": 31.216,
+        "volume": 762621,
+        "predicted": true,
+        "increase": -0.653,
+        "increPer": -2.05
+      }
+    ]
+  },
+  "predictionSummary": {
+    "predictionDays": 7,
+    "currentPrice": 38.424,
+    "predictedPrices": [
+      31.672,
+      32.008,
+      31.605,
+      30.761,
+      31.51,
+      31.868,
+      31.216
+    ],
+    "predictedChanges": [
+      -17.57,
+      1.06,
+      -1.26,
+      -2.67,
+      2.43,
+      1.14,
+      -2.05
+    ],
+    "trend": "下跌",
+    "confidence": 0.0,
+    "expectedReturn": -18.76
+  }
+}
